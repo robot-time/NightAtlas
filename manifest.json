@@ -1,0 +1,26 @@
+{
+  "name": "Night Atlas",
+  "version": "0.3",
+  "manifest_version": 3,
+  "permissions": [
+      "activeTab",
+      "https://abhs.daymap.net/*"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+      {
+          "matches": ["https://abhs.daymap.net/daymap/student/dayplan.aspx"],
+          "js": ["contentScript.js"]
+      }
+  ],
+  "web_accessible_resources": [
+      {
+          "resources": ["overlay.html", "logo.png"],
+          "matches": ["https://abhs.daymap.net/*"]
+      }
+  ]
+}
