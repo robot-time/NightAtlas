@@ -183,7 +183,8 @@ const overlayHTML = `
                     <ul class="footer-links">
                         <li><a href="https://mileshedrick.com">Made by Miles</a></li>
                         <li><a href="https://github.com">Open-Source</a></li>
-                        <li><a>Update 0.3.05</a></li>
+                        <li><a>Update 0.3.06</a></li>
+                        <li><a>Time Spenton the project: 2h</a></li>
                     </ul>
                 </div>
             </div>
