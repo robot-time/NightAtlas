@@ -13,120 +13,197 @@ overlayIframe.style.backgroundColor = 'transparent';
 // Create the overlay HTML content
 const overlayHTML = `
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlay</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
-        body {
+        /* General Styles */
+        html, body {
+            height: 100%;
             margin: 0;
-            padding: 20px;
             font-family: Arial, sans-serif;
             background-color: #252525;
+            color: #ffffff;
         }
+
+        /* Wrapper to make the footer sticky */
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        /* Content Container */
         .content {
-            font-size: 16px;
+            flex: 1;
+            padding: 20px;
+            margin-left: 70px; /* Adjust this to move content away from sidebar */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100vh;
+            width: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #1c1c1c;
             color: #ffffff;
-            width: 375px;
+            padding: 15px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .material-symbols-outlined {
+            color: #5a5fec;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .material-symbols-outlined:hover {
+            text-shadow: 0 0 8px #5a5fec, 0 0 16px #5a5fec, 0 0 24px #5a5fec;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-left p {
+            margin-left: 80px;
+        }
+
+        .footer-right {
+            display: flex;
+        }
+
+        .footer-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #5a5fec;
+        }
+
+        /* Content Box Styles */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .content-box {
+            flex: 1;
             background-color: #424242;
             border-radius: 5px;
-            padding:  6px;
-            margin-left: 100px;
-            white-space: pre-wrap; /* Preserves line breaks and spaces */
-
+            padding: 20px;
+            box-sizing: border-box;
+            white-space: pre-wrap;
         }
-        .content2 {
-            font-size: 16px;
-            color: #ffffff;
-            width: 375px;
-            background-color: #424242;
-            border-radius: 5px;
-            padding:  6px;
-            margin-left: 500px;
-            white-space: pre-wrap; /* Preserves line breaks and spaces */
 
-        }
-        .content3 {
-            font-size: 16px;
-            color: #ffffff;
-            width: 200Spx;
-            background-color: #424242;
-            border-radius: 5px;
-            padding:  6px;
-            margin-left: 900px;
-            white-space: pre-wrap; /* Preserves line breaks and spaces */
-
-        }
         .bold {
             font-weight: bold;
         }
-            .sidebar {
-                height: 100vh;
-                width: 50px;
-                position: fixed;
-                top: 0;
-                left: 0;
-                background-color: #1c1c1c;
-                color: #ffffff;
-                padding: 15px;
-            }
-
-            .sidebar h2 {
-                text-align: center;
-            }
-
-            .sidebar ul {
-                list-style-type: none;
-                padding: 0;
-            }
-
-            .sidebar ul li {
-                margin: 15px 0;
-            }
-
-            .sidebar ul li a {
-                color: #fff;
-                text-decoration: none;
-                display: block;
-                padding: 10px;
-                border-radius: 4px;
-            }
-
-            .sidebar ul li a:hover {
-                background-color: #575757;
-            }
-      .material-symbols-outlined{
-        color: #5a5fec;
-      }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <ul>
-            <li><img src="https://i.imgur.com/DDLafqj.png" alt=""></li>
-            <li><span class="material-symbols-outlined">home</span></li>
-            <li><span class="material-symbols-outlined">person</span></li>
-            <li><span class="material-symbols-outlined">menu_book</span></li>
-            <li><span class="material-symbols-outlined">inbox</span></li>
-            <li><span class="material-symbols-outlined">school</span></li>
-            <li><span class="material-symbols-outlined">calendar_month</span></li>
-        </ul>
+    <div class="wrapper">
+        <div class="sidebar">
+            <ul>
+                <li><a href="https://example.com/home" target="_blank"><img src="https://i.imgur.com/DDLafqj.png" alt="Logo"></a></li>
+                <li><a href="https://abhs.daymap.net/daymap/student/dayplan.aspx" target="_blank"><span class="material-symbols-outlined">home</span></a></li>
+                <li><a href="https://example.com/profile" target="_blank"><span class="material-symbols-outlined">person</span></a></li>
+                <li><a href="https://abhs.daymap.net/daymap/student/portfolio.aspx" target="_blank"><span class="material-symbols-outlined">menu_book</span></a></li>
+                <li><a href="https://abhs.daymap.net/daymap/coms/Messaging.aspx" target="_blank"><span class="material-symbols-outlined">inbox</span></a></li>
+                <li><a href="https://abhs.daymap.net/daymap/student/assignments.aspx" target="_blank"><span class="material-symbols-outlined">school</span></a></li>
+                <li><a href="https://abhs.daymap.net/daymap/calendar/MyCalendar.aspx" target="_blank"><span class="material-symbols-outlined">calendar_month</span></a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="container">
+                <div id="div1" class="content-box">Loading...</div>
+                <div id="div2" class="content-box">Loading...</div>
+                <div id="div3" class="content-box">
+                    <div id="div3Content">Loading...</div>
+                    <div id="div4Content">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-left">
+                    <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <ul class="footer-links">
+                        <li><a href="https://mileshedrick.com">Made by Miles</a></li>
+                        <li><a href="https://github.com">Open-Source</a></li>
+                        <li><a>Update 0.3.05</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
     </div>
-    <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum facilisis luctus. Cras elit nibh, tempor sit amet consectetur ac, finibus ut mi. Etiam mattis efficitur ipsum. Nulla in vestibulum est, ac commodo turpis. Fusce non ex condimentum, iaculis lectus quis, laoreet lectus. Etiam non ex nec quam consectetur sagittis et non sem. Morbi elit augue, mollis euismod enim auctor, facilisis tincidunt velit. Praesent ut tempus quam. Pellentesque eget efficitur ante, a consectetur odio. Pellentesque vestibulum mi vitae augue accumsan, et consectetur erat sollicitudin. Etiam euismod velit lacus, in pellentesque sem pulvinar sollicitudin. Nunc et dapibus ex. Etiam cursus fringilla maximus. Duis id pharetra augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed nunc erat, rhoncus quis vehicula vitae, porta nec nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec vel sem ultrices nisi ornare fermentum. Pellentesque lacinia at enim ac lacinia. Curabitur nec lorem sit amet magna convallis mollis at pulvinar urna. Maecenas egestas nibh ac posuere semper.</div>
-    <div class="content2">Messages</div>
-    <div class="content3">Miles Hedrick</div>
+
     <script>
         window.addEventListener('message', (event) => {
             if (event.data.type === 'UPDATE_TEXT') {
-                let contentDiv = document.querySelector('.content');
-                contentDiv.innerHTML = event.data.text;
+                document.getElementById('div1').innerHTML = event.data.div1Text || 'No content found';
+                document.getElementById('div2').innerHTML = event.data.div2Text || 'No content found';
+                document.getElementById('div3Content').innerHTML = event.data.div3Text || 'No content found';
+                document.getElementById('div4Content').innerHTML = event.data.div4Text || 'No content found';
             }
         });
     </script>
 </body>
 </html>
+
+
 `;
 
 // Function to create a Blob URL for the overlay HTML
@@ -139,29 +216,42 @@ function createOverlayBlobURL(html) {
 overlayIframe.src = createOverlayBlobURL(overlayHTML);
 document.body.appendChild(overlayIframe);
 
-// Function to pull and format all the text content of the nested div with id "ctl00_cp_divEvents"
 function getTextFromUnderlyingPage() {
-    let targetElement = document.querySelector('#ctl00_cp_divEvents');
-    if (targetElement) {
-        let text = targetElement.innerText;
-        let lines = text.split('\n');
-        let formattedLines = lines.map(line => {
-            // Regular expression to match days of the week
-            if (/Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/.test(line)) {
-                return `<div class="bold">${line}</div>`;
-            }
-            return `<div>${line}</div>`;
-        });
-        return formattedLines.join('');
-    } else {
-        return 'No text found';
-    }
+    let div1Content = document.querySelector('#ctl00_cp_divEvents')?.innerHTML || 'Content not found';
+    let div2Content = document.querySelector('#msgCnt')?.innerHTML || 'Content not found';
+    let div3Content = document.querySelector('.sname')?.innerHTML || 'Content not found'; // Updated to select by class
+    let div4Content = document.querySelector('#divIndicators')?.innerHTML || 'Content not found';
+
+    return {
+        div1Text: formatContent(div1Content),
+        div2Text: formatContent(div2Content),
+        div3Text: formatContent(div3Content),
+        div4Text: formatContent(div4Content)
+    };
+}
+
+
+// Helper function to format content and add bold text for days of the week
+function formatContent(content) {
+    let lines = content.split('\n');
+    return lines.map(line => {
+        if (/Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/.test(line)) {
+            return `<div class="bold">${line}</div>`;
+        }
+        return `<div>${line}</div>`;
+    }).join('');
 }
 
 // Communicate with the iframe to send the formatted text
 function updateOverlay() {
-    let text = getTextFromUnderlyingPage();
-    overlayIframe.contentWindow.postMessage({ type: 'UPDATE_TEXT', text: text }, '*');
+    let content = getTextFromUnderlyingPage();
+    overlayIframe.contentWindow.postMessage({ 
+        type: 'UPDATE_TEXT', 
+        div1Text: content.div1Text, 
+        div2Text: content.div2Text, 
+        div3Text: content.div3Text, 
+        div4Text: content.div4Text 
+    }, '*');
 }
 
 // Add a delay before running the updateOverlay function
@@ -169,10 +259,3 @@ setTimeout(() => {
     updateOverlay();
     setInterval(updateOverlay, 5000); // Update every 5 seconds
 }, 3000); // 3000ms delay (3 seconds)
-
-// Optional: Listen for messages from the iframe (if needed)
-window.addEventListener('message', (event) => {
-    if (event.data.type === 'REQUEST_TEXT') {
-        updateOverlay();
-    }
-});
