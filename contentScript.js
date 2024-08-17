@@ -177,7 +177,7 @@ const overlayHTML = `
         <footer class="footer">
             <div class="container">
                 <div class="footer-left">
-                    <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+                    <p>&copy; 2024 Night Atlas. All rights reserved.</p>
                 </div>
                 <div class="footer-right">
                     <ul class="footer-links">
