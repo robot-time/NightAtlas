@@ -1,19 +1,26 @@
-document.getElementById('apply-btn').addEventListener('click', () => {
-  const selectedTheme = document.getElementById('theme-select').value;
-  const selectedColor = document.getElementById('colorPicker').value;
+document.addEventListener('DOMContentLoaded', () => {
+  chrome.storage.sync.get(['selectedTheme', 'selectedColor'], (data) => {
+    if (chrome.runtime.lastError) {
+      console.error('Error retrieving theme:', chrome.runtime.lastError);
+    } else if (data.selectedTheme) {
+      const cssVariables = getThemeVariables(data.selectedTheme, data.selectedColor || '#000000');
+      applyCSSVariables(cssVariables);
 
-  // Save the selected theme and color
-  chrome.storage.sync.set({ selectedTheme, selectedColor }, () => {
-    const cssVariables = getThemeVariables(selectedTheme, selectedColor);
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        function: applyCSSVariables,
-        args: [cssVariables]
-      });
-    });
+      if (data.selectedTheme === 'theme7') {
+        addCornerImage();
+      } else {
+        removeCornerImage();
+      }
+    }
   });
 });
+
+function applyCSSVariables(cssVariables) {
+  console.log('Applying CSS Variables:', cssVariables);
+  for (const [variable, value] of Object.entries(cssVariables)) {
+    document.documentElement.style.setProperty(variable, value);
+  }
+}
 
 function getThemeVariables(theme, selectedColor) {
   const baseVariables = {
@@ -100,27 +107,13 @@ function getThemeVariables(theme, selectedColor) {
       return baseVariables;
   }
 }
-function applyCSSVariables(cssVariables) {
-  for (const [variable, value] of Object.entries(cssVariables)) {
-    document.documentElement.style.setProperty(variable, value);
-  }
-
-  // Add or remove the corner image based on the theme
-  chrome.storage.sync.get('selectedTheme', (data) => {
-    if (data.selectedTheme === 'theme7') {
-      addCornerImage();
-    } else {
-      removeCornerImage();
-    }
-  });
-}
 
 function addCornerImage() {
   let img = document.getElementById('corner-image');
   if (!img) {
     img = document.createElement('img');
     img.id = 'corner-image';
-    img.src = 'https://th.bing.com/th/id/R.56a19587d370ba5a50de04a8b84d4e3d?rik=fQKVtvVJ2hgZZg&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2fcherry-blossom-silhouette-png%2fcherry-blossom-silhouette-png-24.png&ehk=TeUZBOS7BXPN9i5Tq3wcw5OtDwXVkUGIbIupIqv4gZA%3d&risl=&pid=ImgRaw&r=0'; // Replace with your image URL
+    img.src = 'https://th.bing.com/th/id/R.56a19587d370ba5a50de04a8b84d4e3d?rik=fQKVtvVJ2hgZZg&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2fcherry-blossom-silhouette-png%2fcherry-blossom-silhouette-png-24.png&ehk=TeUZBOS7BXPN9i5Tq3wcw5OtDwXVkUGIbIupIqv4gZA%3d&risl=&pid=ImgRaw&r=0';
     img.style.position = 'fixed';
     img.style.bottom = '-30px';
     img.style.right = '-30px';
@@ -139,16 +132,3 @@ function removeCornerImage() {
     img.remove();
   }
 }
-
-    // Get references to the button and the content
-    const dropdownBtn = document.getElementById('dropdown-btn');
-    const hiddenContent = document.getElementById('hiddenContent');
-
-    // Toggle the display of the content on button click
-    dropdownBtn.addEventListener('click', () => {
-        if (hiddenContent.style.display === 'none') {
-            hiddenContent.style.display = 'block';
-        } else {
-            hiddenContent.style.display = 'none';
-        }
-    });

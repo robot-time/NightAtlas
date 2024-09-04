@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My HTML Modifier</title>
-  <script src="popup.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Switcher</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h1>Popup Content</h1>
-  <button id="modifyButton">Modify Page</button>
+  <div class="container">
+    <label for="theme-select">Select Theme:</label>
+    <select id="theme-select">
+      <option value="theme1">Green</option>
+      <option value="theme6">Blue</option>
+      <option value="theme2">Purple</option>
+      <option value="theme3">Orange</option>
+      <option value="theme7">Aesthetic</option>
+      <option value="theme4">Random</option>
+      <option value="theme8">Custom (Beta)</option>
+    </select> 
+    
+  </div>
+  <button id="apply-btn" class="button-34" role="button">Apply Theme</button>
+      <!-- Dropdown button -->
+      <button id="dropdown-btn" class="dropdown-btn">Beta ↓</button>
+
+      <!-- Hidden content -->
+      <div id="hiddenContent">
+        <input type="color" id="colorPicker">
+      </div>
+  <a href="https://tally.so/r/nPlBqQ" target="_blank">Feedback/Bug Report (new theme ideas?)</a>
+  <script src="popup.js"></script>
 </body>
 </html>
